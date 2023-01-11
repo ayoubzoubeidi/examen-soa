@@ -1,5 +1,5 @@
 package tn.isi.banque.domain;
 
-public enum ContractType {
+public enum ContratType {
     CDI, CDD, CIVP
 }

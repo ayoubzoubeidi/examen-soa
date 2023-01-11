@@ -1,16 +1,14 @@
 package tn.isi.banque.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -25,7 +23,10 @@ public class Client {
     private BigDecimal salary;
 
     @Enumerated(EnumType.STRING)
-    private ContractType contractType;
+    private ContratType contratType;
+
+    @OneToMany(mappedBy = "client")
+    private Set<Dossier> dossiers = new HashSet<>();
 
     private Date dob;
 
