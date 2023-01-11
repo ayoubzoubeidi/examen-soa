@@ -22,6 +22,9 @@ public class Dossier {
     @JoinColumn(name = "client_id")
     private Client client;
 
+    @OneToOne(mappedBy = "dossier", cascade = {CascadeType.ALL})
+    private Decision decision;
+
     private BigDecimal montantCredit;
 
     private UUID baremeId;
