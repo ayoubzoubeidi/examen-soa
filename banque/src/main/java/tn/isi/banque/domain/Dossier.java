@@ -1,5 +1,6 @@
 package tn.isi.banque.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +21,7 @@ public class Dossier {
 
     @ManyToOne
     @JoinColumn(name = "client_id")
+    @JsonIgnore
     private Client client;
 
     @OneToOne(mappedBy = "dossier", cascade = {CascadeType.ALL})

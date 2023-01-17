@@ -1,6 +1,8 @@
 package tn.isi.banquecentrale.blacklist;
 
+import java.util.Map;
+
 public interface BlackListService {
 
-    Boolean isBlackList(String cin);
+    Map<String, Boolean> isBlackList(String cin);
 }

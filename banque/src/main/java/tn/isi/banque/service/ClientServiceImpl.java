@@ -28,7 +28,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public Client getClientByCin(String cin) {
-        return clientRepository.getById(cin);
+        return clientRepository.findById(cin).get();
     }
 
     @Override

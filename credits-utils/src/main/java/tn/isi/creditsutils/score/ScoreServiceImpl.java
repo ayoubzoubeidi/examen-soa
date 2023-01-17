@@ -4,6 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 @Service
@@ -13,8 +16,8 @@ public class ScoreServiceImpl implements ScoreService {
     private final ScoreRepository scoreRepository;
 
     @Override
-    public Evaluation calculeScore(CalculScoreRequest calculScoreRequest) {
-
+    public Map<String, Evaluation> calculeScore(CalculScoreRequest calculScoreRequest) {
+        Map<String, Evaluation> response = new HashMap<>();
         UUID dossierId = calculScoreRequest.getDossierId();
         BigDecimal salaire = calculScoreRequest.getSalaire();
         BigDecimal mentualite = calculScoreRequest.getMensualite();
@@ -29,7 +32,8 @@ public class ScoreServiceImpl implements ScoreService {
             score.setScore(0);
             score.setEvaluation(evaluation);
             scoreRepository.saveAndFlush(score);
-            return evaluation;
+            response.put("evaluation", evaluation);
+            return response;
         }
 
 
@@ -45,7 +49,7 @@ public class ScoreServiceImpl implements ScoreService {
             calculScore += 10;
         }
 
-        if (mentualite.divide(salaire).compareTo(new BigDecimal("0.45")) < 0) {
+        if (mentualite.divide(salaire, RoundingMode.HALF_UP).compareTo(new BigDecimal("0.45")) < 0) {
             calculScore += 50;
         }
 
@@ -58,6 +62,7 @@ public class ScoreServiceImpl implements ScoreService {
 
         scoreRepository.saveAndFlush(score);
 
-        return evaluation;
+        response.put("evaluation", evaluation);
+        return response;
     }
 }

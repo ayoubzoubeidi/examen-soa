@@ -1,7 +1,9 @@
 package tn.isi.creditsutils.score;
 
+import java.util.Map;
+
 public interface ScoreService {
 
-    Evaluation calculeScore(CalculScoreRequest calculScoreRequest);
+    Map<String, Evaluation> calculeScore(CalculScoreRequest calculScoreRequest);
 
 }

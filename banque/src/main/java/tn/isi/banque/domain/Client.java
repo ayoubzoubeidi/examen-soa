@@ -25,7 +25,7 @@ public class Client {
     @Enumerated(EnumType.STRING)
     private ContratType contratType;
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     private Set<Dossier> dossiers = new HashSet<>();
 
     private Date dob;

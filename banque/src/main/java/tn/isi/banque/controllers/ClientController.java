@@ -12,6 +12,8 @@ import tn.isi.banque.service.ClientService;
 
 import java.util.UUID;
 
+
+
 @Controller
 @RequestMapping("/clients")
 @RequiredArgsConstructor
@@ -25,8 +27,9 @@ public class ClientController {
     }
 
     @PostMapping
-    public void saveClient(@RequestBody Client client) {
+    public ResponseEntity<?> saveClient(@RequestBody Client client) {
         clientService.createNew(client);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping("/dossier")
